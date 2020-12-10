@@ -1,38 +1,12 @@
 <template>
-  <div>
-    <img alt="Vue logo"
-         src="./assets/logo.png" />
-    <div>
-      <h2>欢迎光临红浪漫洗浴中心</h2>
-      <div>请选择一位美女为你服务</div>
-    </div>
-    <div>
-      <button v-for="(item, index) in girls"
-              :key="index"
-              @click="selectGirlFun(index)">
-        {{item}}
-      </button>
-      <div>你选择了【{{ selectGirl }}】为你服务</div>
-    </div>
-  </div>
+  <transition>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </transition>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-export default defineComponent({
-  name: "App",
-  setup() {
-    const girls = ref(["莫娜", "琴", "凝光"]);
-    const selectGirl = ref("");
-    const selectGirlFun = (index: number) => {
-      selectGirl.value = girls.value[index];
-    };
-    return {
-      girls,
-      selectGirl,
-      selectGirlFun,
-    };
-  },
-});
+import Home from "./views/Home.vue";
 </script>
 <style lang="scss">
 #app {
