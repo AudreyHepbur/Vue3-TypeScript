@@ -1,12 +1,14 @@
 <template>
-  <transition>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
-  </transition>
+  <router-link to="/home">Home</router-link> |
+  <router-link to="/about">About</router-link>
+  <h3></h3>
+  <router-view></router-view>
 </template>
 <script lang="ts">
 import Home from "./views/Home.vue";
+export default {
+  name: "App",
+};
 </script>
 <style lang="scss">
 #app {

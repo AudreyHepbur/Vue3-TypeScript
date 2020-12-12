@@ -1,27 +1,35 @@
 <template>
-  <div><button @click="overAction">点餐完毕</button></div>
-  <div>{{ overText }}</div>
+  <div>
+    <h2 @click="data.overAction">{{ data.overText }}</h2>
+  </div>
+  <h3 v-for="(item, index) in data.list" :key="index">{{ item }}</h3>
 </template>
 <script lang="ts">
+interface DataTy {
+  overText: string;
+  list: string;
+  overAction: () => void;
+}
 import { ref, toRefs, reactive, watch } from "vue";
 export default {
   name: "About",
   setup() {
-    const overText = ref("迪奥娜");
-    const overAction = () => {
-      overText.value = overText.value + "点餐完成 |";
-      // document.title = overText.value;
-    };
-
-    watch(overText, (newV, oldV) => {
+    const data: DataTy = reactive({
+      overText: "临江仙·送钱穆父",
+      list: "",
+      overAction: () => {
+        console.log(data.list);
+        data.list = "一别都门三改火，天涯踏尽红尘。依然一笑作春温。无波真古井，有节是秋筠。惆怅孤帆连夜发，送行淡月微云。尊前不用翠眉颦。人生如逆旅，我亦是行人。";
+      },
+    });
+    watch(data, (newV, oldV) => {
       console.log(`new--->${newV}`);
       console.log(`old--->${oldV}`);
-      document.title = newV;
+      document.title = newV.overText;
     });
 
     return {
-      overText,
-      overAction,
+      data,
     };
   },
 };

@@ -2,14 +2,8 @@
   <div>
     <img alt="Vue logo" src="../assets/logo.png" />
     <div>
-      <h2>欢迎光临红浪漫洗浴中心</h2>
-      <div>请选择一位美女为你服务</div>
-    </div>
-    <div>
-      <button v-for="(item, index) in girls" :key="index" @click="selectGirlFun(index)">
-        {{ item }}
-      </button>
-      <div>你选择了【{{ selectGirl }}】为你服务</div>
+      <h1 @click="selectGirlFun">双燕离</h1>
+      <h2 v-for="(item, index) in selectGirl" :key="index">{{ item }}</h2>
     </div>
   </div>
 </template>
@@ -29,24 +23,36 @@ import {
   onRenderTriggered, //  状态触发
 } from "vue";
 export default {
-  name: "App",
+  name: "Home",
   setup() {
     /**
      * 定义接口
      */
     interface DataProps {
       girls: string[];
-      selectGirl: string;
+      selectGirl: string[];
+      indexes: number;
       selectGirlFun: (index: number) => void;
     }
     /**
      * data添加类型注解
      */
     const data: DataProps = reactive({
-      girls: ["琴", "莫娜", "凝光"],
-      selectGirl: "",
-      selectGirlFun: (index: number) => {
-        data.selectGirl = data.girls[index];
+      girls: [
+        "双燕复双燕，双飞令人羡",
+        "玉楼珠阁不独栖，金窗绣户长相见。",
+        "柏梁失火去，因入吴王宫。",
+        "吴宫又焚荡，雏尽巢亦空。",
+        "憔悴一身在，孀雌忆故雄。",
+        "双飞难再得，伤我寸心中。",
+      ],
+      selectGirl: [],
+      indexes: 0,
+      selectGirlFun: () => {
+        if (data.indexes > data.girls.length) return
+        const number = ++data.indexes;
+        console.log(number);
+        data.selectGirl.push(data.girls[number]);
       },
     });
     onBeforeMount(() => {
